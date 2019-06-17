@@ -49,10 +49,9 @@ class JOG(Dobot):
         msg.params.extend(bytearray(struct.pack('i', cmd)))
         return self._send_command(msg)
 
-##--------------EXECUTING IDLE/STOP FUNC--------------##
+##--------------EXECUTING IDLE/DIAM on JOG--------------##
     def idle(self):
         self._set_jog_cmd(isJoint=1, cmd=IDLE)
-        # print("Stopped")
 
 ##--------------EXECUTING CARTESIAN JOG---------------##
     def xplus(self):
@@ -87,19 +86,19 @@ class JOG(Dobot):
 ##--------------EXECUTING JOINT---------------##
     def joint1pos(self):
         self._set_jog_cmd(isJoint=1, cmd=AP_DOWN)
-        # print("Joint 1+")
+        print("Joint 1+")
     
     def joint1min(self):
         self._set_jog_cmd(isJoint=1, cmd=AN_DOWN)
-        # print("Joint 1-")
+        print("Joint 1-")
     
     def joint2pos(self):
         self._set_jog_cmd(isJoint=1, cmd=BP_DOWN)
-        #print("Joint 2+")
+        print("Joint 2+")
     
     def joint2min(self):
         self._set_jog_cmd(isJoint=1, cmd=BN_DOWN)
-        #print("Joint 2-")
+        print("Joint 2-")
 
     def joint3pos(self):
         self._set_jog_cmd(isJoint=1, cmd=CP_DOWN)
