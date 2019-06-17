@@ -1,7 +1,6 @@
 import struct
 import threading
 import time
-
 import serial
 
 from pydobot.message import Message
@@ -57,7 +56,7 @@ class PTP(Dobot):
         msg.params.extend(bytearray(struct.pack('f', r)))
         return self._send_command(msg)
 
-    def SPEED(self, velocity=100., acceleration=100.):
+    def SPEED(self, velocity, acceleration):
         self._set_ptp_common_params(velocity, acceleration)
         self._set_ptp_coordinate_params(velocity, acceleration)
     
@@ -70,30 +69,23 @@ class PTP(Dobot):
     def MOVL_XYZ(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVL_XYZ)
     
-    ####
     def JUMP_ANGLE(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_JUMP_ANGLE)
-    ####
 
     def MOVJ_ANGLE(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVJ_ANGLE)
-    ###
+
     def MOVL_ANGLE(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVL_ANGLE)
-    ###
 
     def MOVJ_INC(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVJ_INC)
 
-    ###
     def MOVL_INC(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVL_INC)
-    ###
     
     def MOVJ_XYZ_INC(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_MOVJ_INC)
     
-    ###    
     def JUMP_MOVL_XYZ(self, x, y, z, r=0.):
         self._set_ptp_cmd(x, y, z, r, mode=MODE_PTP_JUMP_MOVL_XYZ)
-    ###
