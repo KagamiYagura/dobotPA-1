@@ -1,7 +1,6 @@
 import struct
 import threading
 import time
-
 import serial
 
 from pydobot.message import Message
@@ -16,8 +15,6 @@ class Dobot(threading.Thread):
     j2 = 0.0
     j3 = 0.0
     j4 = 0.0
-
-    # joint_angles = [4]
 
     def __init__(self, port, verbose=True):
         threading.Thread.__init__(self)
@@ -93,12 +90,6 @@ class Dobot(threading.Thread):
         self.j4n = '{:03.1f}'.format(self.j4)
         
         joint = ['0',self.j1n,self.j2n,self.j3n,self.j4n,self.xn,self.yn,self.zn,self.rn] 
-        # joint1 = "j1:%03.1f j2:%03.1f j3:%03.1f j4:%03.1f"%(self.j1, self.j2, self.j3, self.j4)
-        # if self.verbose:
-        #     print(self.x)
-            # return self.x
-            # print("pydobot: x:%03.1f y:%03.1f z:%03.1f r:%03.1f j1:%03.1f j2:%03.1f j3:%03.1f j4:%03.1f" %
-            #       (self.x, self.y, self.z, self.r, self.j1, self.j2, self.j3, self.j4))
         return joint
 
     def _set_end_effector_suction_cup(self, suck=False):
@@ -113,18 +104,7 @@ class Dobot(threading.Thread):
             msg.params.extend(bytearray([0x00]))
         return self._send_command(msg)
 
-    def _set_cp_cmd(self, x, y, z):
-        msg = Message()
-        msg.id = 91
-        msg.ctrl = 0x03
-        msg.params = bytearray(bytes([0x01]))
-        msg.params.extend(bytearray(struct.pack('f', x)))
-        msg.params.extend(bytearray(struct.pack('f', y)))
-        msg.params.extend(bytearray(struct.pack('f', z)))
-        msg.params.append(0x00)
-        return self._send_command(msg)
-
-#HOME FUNCTION    
+    #HOME FUNCTION    
     def _set_home_params(self, x, y, z, r):
         msg = Message()
         msg.id = 30
@@ -186,3 +166,5 @@ class Dobot(threading.Thread):
         return self._send_command(msg)
         if self.verbose:
             print("index: %i" %(self.i))
+            
+            
